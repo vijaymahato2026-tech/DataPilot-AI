@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataPilot AI | Overview</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">D</div>
+            <span>DataPilot <strong>AI</strong></span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-link active" aria-current="page">Overview</a>
+            <a href="/#datasets" class="nav-link">My Datasets</a>
+            <a href="/dashboards" class="nav-link">My Dashboards</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>DATA ANALYTICS PLATFORM</p>
+            <span>DataPilot AI v2.0</span>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Page message for errors/success -->
+        <div id="uploadMessage" class="upload-message" role="status" aria-live="polite" style="margin-bottom:8px;"></div>
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <div>
+                <h1>Overview</h1>
+                <p>Upload datasets and explore your analytics workspace.</p>
+            </div>
+            <div class="topbar-right">
+                <span class="status-indicator">Workspace Active</span>
+            </div>
+        </header>
+
+        <!-- Welcome banner -->
+        <section class="welcome-section">
+            <div>
+                <span class="eyebrow">WELCOME BACK</span>
+                <h2>Your data, ready to explore.</h2>
+                <p>Upload a CSV, Excel, JSON or PDF file to get started with instant profiling and visualisation.</p>
+            </div>
+            <div class="welcome-icon">📊</div>
+        </section>
+
+        <!-- Stats row -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Total Datasets</span>
+                <h2 id="totalDatasets">0</h2>
+                <span class="stat-description">Files in your workspace</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Total Rows</span>
+                <h2 id="totalRows">0</h2>
+                <span class="stat-description">Across all datasets</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Total Columns</span>
+                <h2 id="totalColumns">0</h2>
+                <span class="stat-description">Across all datasets</span>
+            </div>
+        </section>
+
+        <!-- Upload card -->
+        <section class="content-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Upload Dataset</h2>
+                    <p>Supported formats: CSV, XLSX, JSON, PDF — up to 25 MB.</p>
+                </div>
+            </div>
+
+            <div class="upload-zone" id="dropZone">
+                <div class="upload-icon">↑</div>
+                <h3>Drop your file here</h3>
+                <p>or click Browse to select a file from your computer</p>
+                <p class="file-info">CSV · XLSX · JSON · PDF · Max 25 MB</p>
+
+                <input type="file" id="fileInput" accept=".csv,.xlsx,.json,.pdf" hidden>
+
+                <button type="button" class="primary-button" id="browseButton" style="margin-top:16px;">
+                    Browse files
+                </button>
+
+                <span id="selectedFile" class="selected-file"></span>
+            </div>
+
+            <div id="progressContainer" style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:14px;" hidden>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span id="uploadStatus" style="font-size:12px;color:var(--muted);"></span>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:16px;">
+                <button type="button" class="primary-button" id="uploadButton" disabled>
+                    Upload Dataset
+                </button>
+            </div>
+        </section>
+
+        <!-- Dataset list -->
+        <section class="content-card" id="datasets">
+            <div class="section-heading">
+                <div>
+                    <h2>My Datasets</h2>
+                    <p>Click a dataset to explore its profile and build charts.</p>
+                </div>
+                <button type="button" class="secondary-button" id="refreshButton">↺ Refresh</button>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Rows</th>
+                            <th>Columns</th>
+                            <th>Uploaded</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="datasetTable">
+                        <tr>
+                            <td colspan="5" class="empty-state">Loading datasets…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="page-footer">
+            <span>DataPilot AI</span>
+            <span>Analytics made simple.</span>
+        </footer>
+
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

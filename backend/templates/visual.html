@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Builder | DataPilot AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Plotly loaded before app.js so it is available when charts render -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">D</div>
+            <span>DataPilot <strong>AI</strong></span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-link">Overview</a>
+            <a id="backToDataset" href="/" class="nav-link">Dataset Details</a>
+            <a href="#" class="nav-link active" aria-current="page">Visual Builder</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <p>DATA ANALYTICS PLATFORM</p>
+            <span>DataPilot AI v2.0</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <div id="pageMessage" class="upload-message" role="status" aria-live="polite" style="margin-bottom:8px;"></div>
+
+        <header class="topbar">
+            <div>
+                <a id="visualBackLink" href="/" class="back-link">← Back to Dataset</a>
+                <h1>Create Visual</h1>
+                <p>Build charts using your dataset fields.</p>
+            </div>
+        </header>
+
+        <!-- Chart configuration -->
+        <section class="content-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Chart Configuration</h2>
+                    <p>Select your chart type and data fields, then click Generate Chart.</p>
+                </div>
+            </div>
+
+            <div class="builder-grid">
+
+                <div class="form-group">
+                    <label for="chartType">Chart Type</label>
+                    <select id="chartType">
+                        <option value="bar">Bar Chart</option>
+                        <option value="line">Line Chart</option>
+                        <option value="area">Area Chart</option>
+                        <option value="pie">Pie Chart</option>
+                        <option value="donut">Donut Chart</option>
+                        <option value="scatter">Scatter Plot</option>
+                        <option value="histogram">Histogram</option>
+                        <option value="box">Box Plot</option>
+                        <option value="table">Data Table</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="xAxis">X Axis / Category</label>
+                    <select id="xAxis">
+                        <option value="">Choose a field</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="yAxis">Y Axis / Value</label>
+                    <select id="yAxis">
+                        <option value="">Choose a field</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="aggregation">Aggregation</label>
+                    <select id="aggregation">
+                        <option value="sum">Sum</option>
+                        <option value="avg">Average</option>
+                        <option value="count">Count</option>
+                        <option value="min">Minimum</option>
+                        <option value="max">Maximum</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="legendField">Legend / Group By</label>
+                    <select id="legendField">
+                        <option value="">None</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="button" id="createChartButton" class="primary-button">
+                📈 Generate Chart
+            </button>
+        </section>
+
+        <!-- Chart Preview -->
+        <section class="content-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Chart Preview</h2>
+                    <p>Your visualisation will appear here.</p>
+                </div>
+            </div>
+            <div id="chartPreview" class="chart-preview">
+                <p class="empty-state">Configure your chart above and click Generate Chart.</p>
+            </div>
+        </section>
+
+        <!-- Available Fields -->
+        <section class="content-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Available Fields</h2>
+                    <p>Fields detected in your dataset.</p>
+                </div>
+            </div>
+            <p id="fieldCount" style="margin:0 0 12px;font-size:12px;color:var(--muted);">Loading fields…</p>
+            <div id="availableFields" class="available-fields"></div>
+        </section>
+
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

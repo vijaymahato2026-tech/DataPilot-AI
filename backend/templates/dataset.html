@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Details | DataPilot AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">D</div>
+            <span>DataPilot <strong>AI</strong></span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-link">Overview</a>
+            <a href="#" class="nav-link active" aria-current="page">Dataset Details</a>
+            <a href="/dashboards" class="nav-link">My Dashboards</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <p>DATA ANALYTICS PLATFORM</p>
+            <span>DataPilot AI v2.0</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <div id="pageMessage" class="upload-message" role="status" aria-live="polite" style="margin-bottom:8px;"></div>
+
+        <header class="topbar">
+            <div>
+                <a href="/" class="back-link">← Back to Overview</a>
+                <h1 id="datasetTitle">Dataset Details</h1>
+                <p>Explore your dataset and understand its structure.</p>
+            </div>
+            <a id="createVisualButton" href="#" class="primary-button">
+                📊 Create Visual
+            </a>
+        </header>
+
+        <!-- Stats row -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Total Rows</span>
+                <h2 id="datasetRows">—</h2>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Total Columns</span>
+                <h2 id="datasetColumns">—</h2>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Duplicate Rows</span>
+                <h2 id="datasetDuplicates">—</h2>
+            </div>
+        </section>
+
+        <!-- Dataset Profile -->
+        <section class="content-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Dataset Profile</h2>
+                    <p>Review field types, missing values, and unique values.</p>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Column Name</th>
+                            <th>Data Type</th>
+                            <th>Missing Values</th>
+                            <th>Unique Values</th>
+                        </tr>
+                    </thead>
+                    <tbody id="profileTable">
+                        <tr><td colspan="4" class="empty-state">Loading profile…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Data Preview -->
+        <section class="content-card">
+            <div class="section-heading">
+                <div>
+                    <h2>Data Preview</h2>
+                    <p>First 100 rows of your dataset.</p>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead id="previewHead"></thead>
+                    <tbody id="previewBody">
+                        <tr><td class="empty-state">Loading preview…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
